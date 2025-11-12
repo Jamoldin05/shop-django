@@ -1,5 +1,6 @@
 from django.db import models
 from decimal import Decimal
+from django.templatetags.static import static
 
 
 
@@ -39,6 +40,13 @@ class Product(BaseModel):
         else:
             return self.price
         
+    
+    @property
+    def not_found_image(self):
+        if  not self.image:
+            return static('app/images/Image_not_found.png')
+        return self.image
+
 
     def __str__(self):
         return self.name
